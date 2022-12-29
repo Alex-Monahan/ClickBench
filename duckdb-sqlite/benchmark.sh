@@ -8,13 +8,13 @@ pip install duckdb psutil
 
 sudo apt-get install -y sqlite3
 
-sudo rm ./mydb
-sqlite3 mydb < create.sql
+# sudo rm ./mydb
+# sqlite3 mydb < create.sql
 
-wget --continue 'https://datasets.clickhouse.com/hits_compatible/hits.csv.gz'
-gzip -d hits.csv.gz
+# wget --continue 'https://datasets.clickhouse.com/hits_compatible/hits.csv.gz'
+# gzip -d hits.csv.gz
 
-time sqlite3 mydb ".mode csv" ".import hits.csv hits"
+# time sqlite3 mydb ".mode csv" ".import hits.csv hits"
 
 wc -c mydb
 
