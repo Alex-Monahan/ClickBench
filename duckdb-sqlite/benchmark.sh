@@ -2,7 +2,7 @@
 
 # Install
 
-# Launch on AWS with nohup sudo sh benchmark.sh &
+# Launch on AWS with: sudo nohup sh benchmark.sh &
 sudo apt-get update
 sudo apt-get install -y python3-pip
 pip install duckdb psutil
