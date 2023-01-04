@@ -9,13 +9,15 @@ pip install duckdb psutil
 
 sudo apt-get install -y sqlite3
 
-# sudo rm ./mydb
-# sqlite3 mydb < create.sql
+sudo rm ./mydb
+sqlite3 mydb < create.sql
 
-# wget --continue 'https://datasets.clickhouse.com/hits_compatible/hits.csv.gz'
-# gzip -d hits.csv.gz
+wget --continue 'https://datasets.clickhouse.com/hits_compatible/hits.csv.gz'
+gzip -d hits.csv.gz
 
-# time sqlite3 mydb ".mode csv" ".import hits.csv hits"
+head -n 1000000 hits.csv > smallhits.csv
+
+time sqlite3 mydb ".mode csv" ".import smallhits.csv hits"
 
 wc -c mydb
 
@@ -30,4 +32,4 @@ cat log.txt | grep -P '^\d|Killed|Segmentation' | sed -r -e 's/^.*(Killed|Segmen
     awk '{ if (i % 3 == 0) { printf "[" }; printf $1; if (i % 3 != 2) { printf "," } else { print "]," }; ++i; }'
 
 cat log.txt | grep -P '^\d|Killed|Segmentation' | sed -r -e 's/^.*(Killed|Segmentation).*$/null\nnull\nnull/' |
-    awk '{ if (i % 3 == 0) { printf "" }; printf $1; if (i % 3 != 2) { printf "," } else { print "" }; ++i; }' > ./results/results.csv
+    awk '{ if (i % 3 == 0) { printf "" }; printf $1; if (i % 3 != 2) { printf "," } else { print "" }; ++i; }' > ./results/results_1000000.csv
